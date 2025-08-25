@@ -14,7 +14,7 @@ const corsOptions = {
         'https://your-frontend-domain.vercel.app', // Update this with your actual frontend domain
         'https://your-frontend-domain.netlify.app'  // Update this with your actual frontend domain
       ]
-    : ['http://localhost:3000'],
+    : ['http://localhost:5173'],
   credentials: true,
   optionsSuccessStatus: 200
 };
