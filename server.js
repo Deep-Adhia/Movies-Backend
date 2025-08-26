@@ -7,13 +7,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
-// CORS configuration for production
+// CORS configuration with environment variables
 const corsOptions = {
   origin: NODE_ENV === 'production' 
     ? [
-        'https://your-frontend-domain.vercel.app', // Update this with your actual frontend domain
-        'https://your-frontend-domain.netlify.app'  // Update this with your actual frontend domain
-      ]
+        process.env.FRONTEND_URL,
+      ].filter(Boolean) // Remove undefined values
     : ['http://localhost:5173'],
   credentials: true,
   optionsSuccessStatus: 200
