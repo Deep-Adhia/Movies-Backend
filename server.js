@@ -24,7 +24,15 @@ const corsOptions = {
     console.log('🔒 CORS check - Allowed origins:', allowedOrigins);
     console.log('🔒 CORS check - FRONTEND_URL env var:', process.env.FRONTEND_URL);
     
-    if (allowedOrigins.includes(origin)) {
+    // Check if origin matches any allowed origin (with or without trailing slash)
+    const isAllowed = allowedOrigins.some(allowedUrl => {
+      if (!allowedUrl) return false;
+      const normalizedAllowed = allowedUrl.replace(/\/$/, '');
+      const normalizedOrigin = origin.replace(/\/$/, '');
+      return normalizedAllowed === normalizedOrigin;
+    });
+    
+    if (isAllowed) {
       callback(null, true);
     } else {
       console.log('❌ CORS blocked origin:', origin);
